@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
     const [formData, setFormData] = useState({
@@ -21,8 +22,12 @@ const Signup = () => {
         profitSentToManish: '',
         profitSentToHarsh: '',
     });
-
+    
     const [errors, setErrors] = useState({}); // State to manage form validation errors
+    const [isModalOpen, setIsModalOpen] = useState(true);
+    const [secretToken, setSecretToken] = useState('');
+    const [modalError, setModalError] = useState(''); // State to manage modal input validation error
+    const [allowFormAccess, setAllowFormAccess] = useState(false); // Flag to allow access to the transaction form
     const navigate = useNavigate();
 
     const handleSubmit = async () => {
@@ -30,7 +35,12 @@ const Signup = () => {
             const response = await axios.post('http://localhost:5000/api/transactions', formData);
             if (response.status === 201) {
                 console.log('Transaction created successfully');
-                navigate('/transactionlist'); // Navigate to the TransactionList page
+                // Check if the secret token is correct
+                if (secretToken === 'JUNIPER') {
+                    navigate('/'); // Navigate to the TransactionList page
+                } else {
+                    console.error('Invalid secret token');
+                }
             } else {
                 console.error('Failed to create transaction');
             }
@@ -100,13 +110,27 @@ const Signup = () => {
 
         if (Object.keys(validationErrors).length === 0) {
             // If there are no validation errors, submit the form
-            handleSubmit();
+            if (allowFormAccess) {
+                handleSubmit();
+            } else {
+                setModalError('Please enter the secret token first.');
+            }
         } else {
             // If there are validation errors, set them in the state
             setErrors(validationErrors);
         }
     };
 
+    const handleSecretTokenSubmit = () => {
+        if (secretToken === 'JUNIPER') {
+            // If the token is correct, set the flag to allow access to the transaction form
+            setAllowFormAccess(true);
+            setIsModalOpen(false);
+        } else {
+            // If the token is incorrect, show an error message
+            setModalError('Invalid secret token');
+        }
+    };
     return (
         <div className="h-screen flex items-center justify-center">
             <div className="w-full max-w-6xl p-6 m-auto dark:bg-gray-800">
@@ -350,14 +374,41 @@ const Signup = () => {
                     </button>
                 </div>
                 {/* Social Media Login */}
-                <div className="flex justify-center mt-6">
+                <Link to="/transactionlist"><div className="flex justify-center mt-6">
                     <button
                         className="w-1/2 px-6 py-4 text-md font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-xl hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
                     >
-                        Check Data
+                        Check Previous Data
                     </button>
-                </div>
+                </div></Link>
             </div>
+            {isModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60">
+                    <div className="bg-white rounded-2xl p-6 w-96">
+                        <h2 className="text-2xl textfont text-gray-400 font-bold mb-4">Enter Secret Token</h2>
+                        <input
+                            type="password"
+                            className="w-full px-4 py-2 border rounded-lg"
+                            placeholder="Secret Token"
+                            value={secretToken}
+                            onChange={(e) => {
+                                setSecretToken(e.target.value);
+                                setModalError(''); // Clear the validation error on input change
+                            }}
+                        />
+                        {modalError && <div className="text-red-500">{modalError}</div>}
+                        <div className="flex justify-end mt-4">
+                            <button
+                                className="px-4 py-2 mr-2 bg-blue-500 text-white rounded-md"
+                                onClick={handleSecretTokenSubmit}
+                            >
+                                Submit
+                            </button>
+                           
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
