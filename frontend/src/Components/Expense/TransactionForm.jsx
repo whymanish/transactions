@@ -7,7 +7,7 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     date: "",
     volume: "",
-    deepakVolume: "",
+    abhinashVolume: "",
     manishVolume: "",
     euroPrice: "",
     euroAdded: "",
@@ -16,9 +16,9 @@ const Signup = () => {
     usdtPurchased: "",
     usdtSellingPrice: "",
     profitEarned: "",
-    profitSentToDeepak: "",
+    profitSentToAbhinash: "",
     profitSentToManish: "",
-    profitSentToHarsh: "",
+    stsf: "",
   });
 
   const [errors, setErrors] = useState({}); // State to manage form validation errors
@@ -37,7 +37,7 @@ const Signup = () => {
       if (response.status === 201) {
         console.log("Transaction created successfully");
         // Check if the secret token is correct
-        if (secretToken === "JUNIPER") {
+        if (secretToken === "ADITI") {
           navigate("/"); // Navigate to the TransactionList page
         } else {
           console.error("Invalid secret token");
@@ -65,7 +65,7 @@ const Signup = () => {
       validationErrors.volume = "Volume is required";
     }
     if (!formData.deepakVolume) {
-      validationErrors.deepakVolume = "Deepak Volume is required";
+      validationErrors.abhinashVolume = "Abhinash Volume is required";
     }
     if (!formData.manishVolume) {
       validationErrors.manishVolume = "Manish Volume is required";
@@ -94,13 +94,13 @@ const Signup = () => {
     }
     
     if (!formData.profitSentToDeepak) {
-      validationErrors.profitSentToDeepak = "Profit Sent To Deepak is required";
+      validationErrors.profitSentToAbhinash = "Profit Sent To Abhinash is required";
     }
     if (!formData.profitSentToManish) {
       validationErrors.profitSentToManish = "Profit Sent To Manish is required";
     }
     if (!formData.profitSentToHarsh) {
-      validationErrors.profitSentToHarsh = "Profit Sent To Harsh is required";
+      validationErrors.stsf = "Skrill to Skrill Fees is required";
     }
 
     if (Object.keys(validationErrors).length === 0) {
@@ -117,7 +117,7 @@ const Signup = () => {
   };
 
   const handleSecretTokenSubmit = () => {
-    if (secretToken === "JUNIPER") {
+    if (secretToken === "ADITI") {
       // If the token is correct, set the flag to allow access to the transaction form
       setAllowFormAccess(true);
       setIsModalOpen(false);
@@ -166,18 +166,18 @@ const Signup = () => {
             </div>
             <div className="mt-4">
               <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
-                Deepak's Volume
+                Abhinash's Volume
               </label>
               <input
                 type="text"
-                name="deepakVolume"
+                name="abhinashVolume"
                 className="block w-full px-4 py-4 mt-2 text-gray-700 bg-white border rounded-xl"
                 placeholder="Enter Data"
-                value={formData.deepakVolume}
+                value={formData.abhinashVolume}
                 onChange={handleInputChange}
               />
-              {errors.deepakVolume && (
-                <div className="text-red-500">{errors.deepakVolume}</div>
+              {errors.abhinashVolume && (
+                <div className="text-red-500">{errors.abhinashVolume}</div>
               )}
             </div>
             <div className="mt-4">
@@ -312,23 +312,23 @@ const Signup = () => {
             
             <div className="mt-4">
               <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
-                Profit Sent To Deepak
+                Profit Sent To Abhinash
               </label>
               <input
                 type="text"
-                name="profitSentToDeepak"
+                name="profitSentToAbhinash"
                 className="block w-full px-4 py-4 mt-2 text-gray-700 bg-white border rounded-xl"
                 placeholder="Enter Data"
-                value={formData.profitSentToDeepak}
+                value={formData.profitSentToAbhinash}
                 onChange={handleInputChange}
               />
-              {errors.profitSentToDeepak && (
-                <div className="text-red-500">{errors.profitSentToDeepak}</div>
+              {errors.profitSentToAbhinash && (
+                <div className="text-red-500">{errors.profitSentToAbhinash}</div>
               )}
             </div>
             <div className="mt-4">
               <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
-                Profit sent to Manish
+                Profit Sent To Manish
               </label>
               <input
                 type="text"
@@ -344,18 +344,18 @@ const Signup = () => {
             </div>
             <div className="mt-4">
               <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
-                Profit Sent To Harsh
+               Skrill to Skrill Fees
               </label>
               <input
                 type="text"
-                name="profitSentToHarsh"
+                name="stsf"
                 className="block w-full px-4 py-4 mt-2 text-gray-700 bg-white border rounded-xl"
                 placeholder="Enter Data"
-                value={formData.profitSentToHarsh}
+                value={formData.stsf}
                 onChange={handleInputChange}
               />
-              {errors.profitSentToHarsh && (
-                <div className="text-red-500">{errors.profitSentToHarsh}</div>
+              {errors.srsf && (
+                <div className="text-red-500">{errors.stsf}</div>
               )}
             </div>
 

@@ -18,7 +18,7 @@ const TransactionList = () => {
 
     return (
         <div>
-            <h2 className='text-3xl font-bold text-center mt-6 text-[#C5C5C5]'>"Revolut Transactions"</h2>
+            <h2 className='text-3xl font-bold text-center mt-6 text-[#C5C5C5]'>"Skrill Transactions"</h2>
             <div className='flex justify-center'>
             <div className='grid lg:grid-cols-3 gap-8'>
             {transactions.map((transaction) => (

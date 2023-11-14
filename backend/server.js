@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-const dbURI = 'mongodb+srv://Manish026636:manish1728@cluster0.fotxcbf.mongodb.net/revolut';
+const dbURI = 'mongodb+srv://Manish026636:manish1728@cluster0.fotxcbf.mongodb.net/skrill';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
@@ -21,7 +21,7 @@ db.once('open', () => console.log('Connected to MongoDB'));
 const Transaction = mongoose.model('Transaction', {
   date: String,
   volume: String,
-  deepakVolume: String,
+  abhinashVolume: String,
   manishVolume: String,
   euroPrice: String,
   euroAdded: String,
@@ -32,9 +32,9 @@ const Transaction = mongoose.model('Transaction', {
   usdtSellingPrice: String,
   profitEarned: String,
   profitDivision: String,
-  profitSentToDeepak: String,
+  profitSentToAbhinash: String,
   profitSentToManish: String,
-  profitSentToHarsh: String,
+  stsf: String,
   // Define other fields as needed
 });
 

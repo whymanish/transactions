@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Card = ({ transaction }) => {
-  const ratio = parseFloat(transaction.profitEarned) / parseFloat(transaction.volume) * 100 ;
+  const ratio = parseFloat((parseFloat(transaction.profitEarned) / parseFloat(transaction.volume) * 100).toFixed(3));
   console.log(ratio)
-  const dkratio = parseFloat(transaction.deepakVolume) / parseFloat(transaction.volume) * 100 ;
+  const dkratio = parseFloat(parseFloat(transaction.deepakVolume) / parseFloat(transaction.volume) * 100).toFixed(3) ;
   const mkratio = parseFloat(transaction.manishVolume) / parseFloat(transaction.volume) * 100 ;
   const totaleuro = parseFloat(transaction.euroAdded) + parseFloat(transaction.addingFees) ;
   return (
@@ -13,7 +13,7 @@ const Card = ({ transaction }) => {
           <h2 className='text-[#9400FF] textfont text-xl '>Date : <span className='maintext'>{transaction.date}</span></h2>
           <h2 className='text-[#F94C10] textfont text-xl '>Volume : <span className='maintext'>{transaction.volume} RS</span></h2>
           <h2 className='text-[#F11A7B] textfont text-xl '>
-            Deepak : <span className='maintext'>{transaction.deepakVolume} RS</span> - Manish : <span className='maintext'>{transaction.manishVolume} RS </span>
+            Abhinash : <span className='maintext'>{transaction.abhinashVolume} RS</span> - Manish : <span className='maintext'>{transaction.manishVolume} RS </span>
           </h2>
           <h2 className='text-[#252525] textfont  text-xl  '>Euro Price : <span className='maintext'>{transaction.euroPrice} RS</span></h2>
           <h2 className='text-[#252525] textfont text-xl  '>Euro Added : <span className='maintext'>{transaction.euroAdded}<span className='border-l-2 mx-4 border-gray-200'></span></span> Adding Fees: <span className='maintext'>{transaction.addingFees}</span></h2>
@@ -23,9 +23,9 @@ const Card = ({ transaction }) => {
           <h2 className='text-[#252525] textfont text-xl  '>USDT Selling : <span className='maintext'>{transaction.usdtSellingPrice} RS</span></h2>
           <h2 className='text-[#22C8AA] textfont text-xl  '>Profit Earned : <span className='maintext'>{transaction.profitEarned} RS</span></h2>
           <h2 className='text-[#22C8AA] textfont text-xl  '>Profit Division : <span className='maintext'>{dkratio}% / {mkratio}%</span></h2>
-          <h2 className='text-[#22C8AA] textfont text-xl  '>Profit Sent to Deepak : <span className='maintext'>{transaction.profitSentToDeepak} RS</span></h2>
+          <h2 className='text-[#22C8AA] textfont text-xl  '>Profit Sent to Abhinash : <span className='maintext'>{transaction.profitSentToAbhinash} RS</span></h2>
           <h2 className='text-[#22C8AA] textfont text-xl  '>Profit Sent to Manish : <span className='maintext'>{transaction.profitSentToManish} RS</span></h2>
-          <h2 className='text-[#F11A7B] textfont text-xl  '>Profit Sent to Harsh : <span className='maintext'>{transaction.profitSentToHarsh} RS</span></h2>
+          <h2 className='text-[#F11A7B] textfont text-xl  '>Skrill to Skrill Fees : <span className='maintext'>{transaction.stsf} EURO</span></h2>
           <div className='bg-gray-900 hover:bg-indigo-600 transition w-32 py-2 mt-4  rounded-lg'>
           <h2 className='text-center  maintext text-3xl text-white'>{ratio} %</h2>
           </div>
